@@ -1,0 +1,12 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Src\\": "src/"
+    }
+  },
+  "require": {
+    "ramsey/uuid": "^4.7",
+    "altorouter/altorouter": "^2.0",
+    "ext-pdo": "*"
+  }
+}
