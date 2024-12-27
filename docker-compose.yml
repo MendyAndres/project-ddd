@@ -5,9 +5,13 @@ services:
       dockerfile: Dockerfile
     container_name: php
     volumes:
-      - ./simple-products-ddd:/var/www/html
+      - app_data:/var/www/html
     networks:
       - ddd-network
+    environment:
+      PHP_MEMORY_LIMIT: 256M
+      PHP_MAX_EXECUTION_TIME: 60
+
   mysql:
     image: mysql:8.0
     container_name: ddd-mysql
@@ -22,10 +26,11 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: pass
     volumes:
-      - ./simple-products-ddd/scripts/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
       - db_data:/var/lib/mysql
+      - ./simple-products-ddd/scripts/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
     networks:
       - ddd-network
+
   nginx:
     image: nginx
     volumes:
@@ -43,4 +48,5 @@ networks:
         driver: bridge
 
 volumes:
-    db_data:
+  app_data:
+  db_data:
