@@ -7,7 +7,7 @@ namespace Src\Commerce\Products\Application\UseCases;
 use Src\Commerce\Products\Application\DTOs\ProductDTO;
 use Src\Commerce\Products\Domain\Repositories\ProductRepositoryInterface;
 
-final class ListProductsUseCase
+final class ListProductUseCase
 {
     private ProductRepositoryInterface $repository;
 
@@ -17,15 +17,14 @@ final class ListProductsUseCase
     }
 
     /**
-     * Executes the use case to list all products.
+     * Executes the use case to list a product by its ID.
      *
-     * This method retrieves all products from the repository and maps them to ProductDTO objects.
-     *
-     * @return array An array of ProductDTO objects representing the products.
+     * @param string $id The ID of the product to retrieve.
+     * @return ProductDTO The product data transfer object.
      */
-    public function execute(): array
+    public function execute(string $id): ProductDTO
     {
-        $products = $this->repository->findAll();
-        return array_map(fn($product) => ProductDTO::fromProduct($products), $products);
+        $products = $this->repository->findById($id);
+        return ProductDTO::fromProduct($products);
     }
 }

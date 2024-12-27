@@ -17,6 +17,15 @@ final class UpdateProductUseCase
         $this->productRepository = $productRepository;
     }
 
+    /**
+     * Executes the use case to update a product.
+     *
+     * @param string $productId The ID of the product to be updated.
+     * @param string|null $newName The new name for the product, or null if not updating the name.
+     * @param string|null $newDescription The new description for the product, or null if not updating the description.
+     * @return void
+     * @throws InvalidArgumentException If the input parameters are invalid.
+     */
     public function execute(
         string $productId,
         ?string $newName,

@@ -26,6 +26,15 @@ final class CreateProductUseCase
         $this->productFactory = $productFactory;
     }
 
+    /**
+     * Executes the use case to create a new product.
+     *
+     * @param string $name The name of the product.
+     * @param string $description The description of the product.
+     * @param float $price The price of the product.
+     * @return Product The created product.
+     * @throws InvalidArgumentException If the product data is invalid.
+     */
     public function execute(string $name, string $description, float $price): Product
     {
         if (empty($name) || empty($description) || $price <= 0) {
